@@ -11,21 +11,8 @@ import FinishedScreen from "./FinishedScreen";
 import Footer from "./Footer";
 import Timer from "./Timer";
 
-const SECS_PER_QUESTION = 30;
-
 export default function App() {
-  const {
-    questions,
-    numQuestions,
-    status,
-    index,
-    answer,
-    points,
-    highscore,
-    secondsRemaining,
-    dispatch,
-    maxPossiblePoints,
-  } = useQuiz();
+  const { status } = useQuiz();
   return (
     <div className="app">
       <Header />
@@ -33,43 +20,19 @@ export default function App() {
       <Main className="main">
         {status === "loading" && <Loader />}
         {status === "error" && <Error />}
-        {status === "ready" && (
-          <StartScreen numQuestions={numQuestions} dispatch={dispatch} />
-        )}
+        {status === "ready" && <StartScreen />}
         {status === "active" && (
           <>
-            <Progress
-              index={index}
-              numQuestions={numQuestions}
-              points={points}
-              maxPossiblePoints={maxPossiblePoints}
-              answer={answer}
-            />
-            <Question
-              question={questions[index]}
-              dispatch={dispatch}
-              answer={answer}
-            />
+            <Progress />
+            <Question />
 
             <Footer>
-              <Timer dispatch={dispatch} secondsRemaining={secondsRemaining} />
-              <NextButton
-                dispatch={dispatch}
-                answer={answer}
-                index={index}
-                numQuestions={numQuestions}
-              />
+              <Timer />
+              <NextButton />
             </Footer>
           </>
         )}
-        {status === "finished" && (
-          <FinishedScreen
-            points={points}
-            maxPossiblePoints={maxPossiblePoints}
-            highscore={highscore}
-            dispatch={dispatch}
-          />
-        )}
+        {status === "finished" && <FinishedScreen />}
       </Main>
     </div>
   );

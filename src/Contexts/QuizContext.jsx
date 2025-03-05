@@ -102,8 +102,8 @@ function QuizProvider({ children }) {
         points,
         highscore,
         secondsRemaining,
-        dispatch,
         maxPossiblePoints,
+        dispatch,
       }}
     >
       {children}
